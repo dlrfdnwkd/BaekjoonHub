@@ -26,10 +26,10 @@ async function parseData() {
   const language_extension = document.querySelector('div.editor > ul > li.nav-item > a').innerText.split('.')[1]
   const code = document.querySelector('textarea#code').value;
   const result_message =
-    [...document.querySelectorAll('#output > pre.console-content > div.console-message')]
+    [...document.querySelectorAll('.console-message')]
       .map((x) => x.innerText)
       .filter((x) => x.includes(': '))
-      .reduce((x, y) => `${x}<br/>${y}`, '') || 'Empty';
+      .reduce((x, y) => `${x}${y}<br>`, '') || 'Empty';
   const [runtime, memory] = [...document.querySelectorAll('td.result.passed')]
     .map((x) => x.innerText)
     .map((x) => x.replace(/[^., 0-9a-zA-Z]/g, '').trim())
@@ -54,7 +54,7 @@ async function makeData(origin) {
     + `시간: ${runtime}\n\n`
     + `### 구분\n\n`
     + `${division.replace('/', ' > ')}\n\n`
-    + `### 채점결과\n\n`
+    + `### 채점결과\n`
     + `${result_message}\n\n`
     + `### 문제 설명\n\n`
     + `${problem_description}\n\n`
